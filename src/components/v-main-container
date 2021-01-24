@@ -1,0 +1,14 @@
+<template>
+    <div class="vMainContainer">
+        <h1>Online shop</h1>
+    </div>
+</template>
+<script>
+export default {
+  name: 'v-main-container'
+}
+</script>
+
+<style>
+
+</style>
