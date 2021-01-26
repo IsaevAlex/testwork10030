@@ -5,3 +5,46 @@
   font-size: 32px;
   line-height: 41px;
 }
+
+.subTitle{
+  font-family: 'PT Sans', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+
+  &-grey{
+    color: #59606D;
+  }
+}
+
+.productTitle{
+  font-family: 'PT Sans', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+
+  &-grey{
+    color: #59606D;
+  }
+}
+
+.productPrice{
+  font-family: 'PT Sans', sans-serif;
+  color: #1F1F1F;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+
+  &-pt{
+    padding-top: 6px;
+  }
+
+  &-dark{
+    color: #1F1F1F;
+  }
+}
+
+

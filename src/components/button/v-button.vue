@@ -40,8 +40,13 @@ export default {
     color: #333;
     background-color: #fff;
     border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    width: 100%;
+    line-height: 21px;
+
+    font-family: 'PT Sans', sans-serif;
     outline: none;
     cursor: pointer;
 
@@ -54,46 +59,20 @@ export default {
     &.withIcon{
       border: none;
       transition: all .2s ease-in-out;
+      padding: 0;
       &:hover{
         border: none;
         background-color: none;
         transform: scale(1.1);
       }
     }
-    &.danger {
-      background-color: #dc3545;
-      border-color: #dc3545;
-      color: #fff;
-      &:hover{
-        background-color: #c82333;
-        border-color: #bd2130;
-      }
-    }
-    &.success {
-      background-color: #28a745;
-      border-color: #28a745;
-      color: #fff;
-      &:hover{
-        background-color: #218838;
-        border-color: #1e7e34;
-      }
-    }
-    &.edit{
-      color: #000;
-      background-color: #ffc107;
-      border-color: #ffc107;
-      &:hover{
-        background-color: #ffca2c;
-        border-color: #ffc720;
-      }
-    }
     &.info {
-      background-color: #007bff;
-      border-color: #007bff;
+      background-color: #000;
+      border-color: #000;
       color: #fff;
       &:hover{
-        background-color: #0069d9;
-        border-color: #0062cc;
+        background-color: #59606D;
+        border-color: #59606D;
       }
     }
 

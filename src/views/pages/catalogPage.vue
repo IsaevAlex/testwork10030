@@ -6,17 +6,20 @@
     <div class="catalogPage__products">
       <v-catalog></v-catalog>
     </div>
+    <v-cart></v-cart>
   </div>
 </template>
 
 <script>
-  import vCatalog from '@/components/v-catalog'
-  export default {
-    name: 'catalogPage',
-    components:{
-      vCatalog
-    }
+import vCart from '@/components/cart/v-cart'
+import vCatalog from '@/components/catalog/v-catalog'
+export default {
+  name: 'catalogPage',
+  components:{
+    vCatalog,
+    vCart
   }
+}
 </script>
 
 <style lang="scss">
@@ -25,6 +28,7 @@
     &__title{
       display: flex;
       justify-content: space-between;
+      margin-bottom: 1em;
     }
   }
 </style>

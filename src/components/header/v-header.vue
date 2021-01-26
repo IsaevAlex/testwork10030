@@ -5,7 +5,7 @@
         Online shop
       </div>
       <div class="header__icon">
-        <v-button type="withIcon">
+        <v-button @click="toggleCart" type="withIcon" >
           <img src="@/assets/icons/cart-icon.svg" alt="">
         </v-button>
       </div>
@@ -15,10 +15,19 @@
 
 <script>
 import vButton from '@/components/button/v-button';
+import { mapActions } from 'vuex';
 export default {
   name: 'v-header',
   components:{
     vButton
+  },
+  methods:{
+    ...mapActions([
+      'TOGGLE_CART'
+    ]),
+    toggleCart(){
+      this.TOGGLE_CART();
+    }
   }
 }
 </script>
