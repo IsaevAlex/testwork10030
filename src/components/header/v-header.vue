@@ -47,6 +47,10 @@ export default {
       align-items: center;
       padding: 0 88px;
       justify-content: space-between;
+
+      @media screen and (max-width: 1500px){
+        padding: 0px 30px;
+      }
     }
   }
 </style>

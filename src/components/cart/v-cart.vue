@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition transition="fade">
+    <transition name="slide">
       <div class="vCart" v-show="CARTOPEN" >
         <div class="vCart__header">
           <div class="vCart__title">
@@ -20,7 +20,7 @@
             <div class="vCart__subTitle subTitle subTitle-grey">
               <span>Пока что вы ничего не добавили в корзину</span>
             </div>
-            <div class="vCart__btn">
+            <div class="vCart__btn" @click="closeCart">
               <v-button type="info">Перейти к выбору</v-button>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default {
 
     &__items{
       flex: 1 1 auto;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
 
     /*&__btn{*/
@@ -143,21 +143,16 @@ export default {
   }
 
   .slide-leave-active,
-  .fade-enter-active {
-    transition: all 2.5s cubic-bezier(.65, .05, .36, 1);
+  .slide-enter-active {
+    transition: 1s;
   }
-  .slide-enter-active,
-  .fade-leave-active {
-    transition: all .5s cubic-bezier(.65, .05, .36, 1);
+  .slide-enter {
+    transform: translate(100%, 0);
   }
-  .slide-enter,
   .slide-leave-to {
-    transform: translateX(100%);
+    transform: translate(100%, 0);
   }
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+
+
 
 </style>

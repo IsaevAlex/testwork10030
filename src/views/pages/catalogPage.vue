@@ -1,5 +1,5 @@
 <template>
-  <div class="catalogPage">
+  <div class="catalogPage catalogPage-padding">
     <div class="catalogPage__title">
       <h1 class="title">Каталог</h1>
     </div>
@@ -24,7 +24,12 @@ export default {
 
 <style lang="scss">
   .catalogPage{
-    padding: 32px 88px;
+    &-padding{
+      padding: 32px 88px;
+      @media screen and (max-width: 1500px){
+        padding: 32px 30px;
+      }
+    }
     &__title{
       display: flex;
       justify-content: space-between;
