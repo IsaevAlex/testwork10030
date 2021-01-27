@@ -23,13 +23,6 @@ export default {
     vCatalogItem
   },
   created(){
-    // this.$axios.get('https://fakestoreapi.com/products')
-    //   .then(response => {
-    //     this.products = response.data;
-    //   })
-    //   .catch(e => {
-    //     this.errors.push(e);
-    //   });
     this.GET_PRODUCTS();
   },
   computed:{

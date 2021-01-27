@@ -8,6 +8,14 @@
         <v-button @click="toggleCart" type="withIcon" >
           <img src="@/assets/icons/cart-icon.svg" alt="">
         </v-button>
+        <div class="header__cartCount" v-if="GET_COUNT_QUANTITY !== 0">
+          <div v-if="GET_COUNT_QUANTITY > 99">
+            +99
+          </div>
+          <div v-else>
+            {{ GET_COUNT_QUANTITY }}
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -15,11 +23,16 @@
 
 <script>
 import vButton from '@/components/button/v-button';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'v-header',
   components:{
     vButton
+  },
+  computed:{
+    ...mapGetters([
+      'GET_COUNT_QUANTITY'
+    ]),
   },
   methods:{
     ...mapActions([
@@ -41,6 +54,22 @@ export default {
     background: #FFFFFF;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 0px 0px 8px 8px;
+    &__cartCount{
+      width: 25px;
+      background-color: red;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      position: absolute;
+      color: #fff;
+      font-weight: bold;
+      top: 10px;
+      right: 20px;
+      font-family: 'PT Sans', sans-serif;
+    }
+
     &__container{
       height: 66px;
       display: flex;

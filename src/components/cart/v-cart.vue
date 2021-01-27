@@ -39,10 +39,10 @@
               <span>Итого:</span>
             </div>
             <div class="vCart__total">
-              {{ totalPrice }}
+              {{ GET_CART_PRICE_SUM }} P
             </div>
           </div>
-          <div class="vCart__btn">
+          <div class="vCart__btn" @click="openOrderModal">
             <v-button type="info">Оформить заказ</v-button>
           </div>
         </div>
@@ -61,16 +61,17 @@ export default {
     vButton,
     vCartItem
   },
-  mounted () {
-    console.log(this.CART);
-  },
   methods:{
     ...mapActions([
       'DELETE_PRODUCT_FROM_CART',
-      'TOGGLE_CART'
+      'TOGGLE_CART',
+      'TOGGLE_ORDER_MODAL'
     ]),
     closeCart(){
       this.TOGGLE_CART();
+    },
+    openOrderModal(){
+      this.TOGGLE_ORDER_MODAL();
     },
     deleteProductFromCart(index){
       this.DELETE_PRODUCT_FROM_CART(index);
@@ -78,17 +79,8 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'CART','CARTOPEN'
-    ]),
-    totalPrice() {
-      let total = 0;
-
-      for (let item of this.$store.state.cart) {
-        total += item.total;
-      }
-
-      return total;
-    }
+      'CART','CARTOPEN','GET_CART_PRICE_SUM'
+    ])
   }
 }
 </script>

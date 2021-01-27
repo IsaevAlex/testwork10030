@@ -8,7 +8,7 @@
         <p>{{ cartData.title }}</p>
       </div>
       <div class="vCartItem__price productPrice-pt productPrice-dark productPrice">
-        <p>{{ cartData.total }}</p>
+        <p>{{ cartData.total }} P</p>
       </div>
       <div class="vCartItem__count productPrice-pt productPrice-dark productPrice">
         <p>

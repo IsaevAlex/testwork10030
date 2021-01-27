@@ -4,20 +4,29 @@
       <h1 class="title">Каталог</h1>
     </div>
     <div class="catalogPage__products">
-      <v-catalog></v-catalog>
+        <v-preloader v-if="GET_PRELOADER_STATUS"/>
+        <v-catalog  v-else></v-catalog>
+
     </div>
-    <v-cart></v-cart>
+
   </div>
 </template>
 
 <script>
-import vCart from '@/components/cart/v-cart'
+
+import {mapGetters} from 'vuex';
 import vCatalog from '@/components/catalog/v-catalog'
+import vPreloader from '@/components/preloader/v-preloader'
 export default {
   name: 'catalogPage',
   components:{
     vCatalog,
-    vCart
+    vPreloader
+  },
+  computed:{
+    ...mapGetters([
+      'GET_PRELOADER_STATUS'
+    ])
   }
 }
 </script>

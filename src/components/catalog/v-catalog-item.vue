@@ -8,7 +8,7 @@
         <p>{{ productData.title }}</p>
       </div>
       <div class="vCatalogItem__price productPrice productPrice-pt productPrice-dark">
-        <p>{{ productData.price }}</p>
+        <p>{{ productData.price }} P</p>
       </div>
     </div>
     <div class="vCatalogItem__button">
