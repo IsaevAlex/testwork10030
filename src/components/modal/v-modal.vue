@@ -1,5 +1,6 @@
 <template>
-  <div class="modal modal-mask" transition="modal">
+  <transition name="modal">
+    <div class="modal modal-mask">
     <div class="modal__wrapper">
       <div class="modal__container">
         <div class="modal__header">
@@ -18,6 +19,8 @@
       </div>
     </div>
   </div>
+  </transition>
+
 </template>
 
 <script>
@@ -70,15 +73,14 @@
       margin: 20px 0;
     }
 
-    &-enter,
-    &-leave{
-      opacity: 0;
+    &-enter-active,
+    &-leave-active {
+      transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.4s linear;
     }
 
-
-    &-enter &__container,
-    &-leave &__container{
-      transform: scale(1.1);
+    &-enter,
+    &-leave-to {
+      opacity: 0;
     }
 
   }

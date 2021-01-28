@@ -65,9 +65,13 @@ export default {
       position: absolute;
       color: #fff;
       font-weight: bold;
-      top: 10px;
-      right: 20px;
+      top: -15px;
+      right: -15px;
       font-family: 'PT Sans', sans-serif;
+    }
+
+    &__icon{
+      position: relative;
     }
 
     &__container{

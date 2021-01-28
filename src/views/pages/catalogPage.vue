@@ -4,8 +4,7 @@
       <h1 class="title">Каталог</h1>
     </div>
     <div class="catalogPage__products">
-        <v-preloader v-if="GET_PRELOADER_STATUS"/>
-        <v-catalog  v-else></v-catalog>
+      <v-catalog/>
 
     </div>
 
@@ -16,17 +15,10 @@
 
 import {mapGetters} from 'vuex';
 import vCatalog from '@/components/catalog/v-catalog'
-import vPreloader from '@/components/preloader/v-preloader'
 export default {
   name: 'catalogPage',
   components:{
-    vCatalog,
-    vPreloader
-  },
-  computed:{
-    ...mapGetters([
-      'GET_PRELOADER_STATUS'
-    ])
+    vCatalog
   }
 }
 </script>

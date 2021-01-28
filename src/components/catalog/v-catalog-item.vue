@@ -1,16 +1,19 @@
 <template>
-  <div class="vCatalogItem">
-    <div class="vCatalogItem__header">
-      <img class="vCatalogItem__img vCatalogItemImg" :src="productData.image" alt="">
-    </div>
-    <div class="vCatalogItem__content">
-      <div class="vCatalogItem__title productTitle productTitle-grey">
-        <p>{{ productData.title }}</p>
+  <div class="vCatalogItem" >
+    <div class="vCatalogItem__wrapper" @click="openCatalogItem">
+      <div class="vCatalogItem__header">
+        <img class="vCatalogItem__img vCatalogItemImg" :src="productData.image" alt="">
       </div>
-      <div class="vCatalogItem__price productPrice productPrice-pt productPrice-dark">
-        <p>{{ productData.price }} P</p>
+      <div class="vCatalogItem__content">
+        <div class="vCatalogItem__title productTitle productTitle-grey">
+          <p>{{ productData.title }}</p>
+        </div>
+        <div class="vCatalogItem__price productPrice productPrice-pt productPrice-dark">
+          <p>{{ productData.price }} P</p>
+        </div>
       </div>
     </div>
+
     <div class="vCatalogItem__button">
       <v-button type="info" @click="addToCart">Добавить в корзину</v-button>
     </div>
@@ -35,6 +38,9 @@ export default {
   methods:{
     addToCart(){
       this.$emit('addToCart');
+    },
+    openCatalogItem(){
+      this.$emit('openCatalogItem');
     }
   }
 }
@@ -42,21 +48,23 @@ export default {
 
 <style scoped lang="scss">
   .vCatalogItem{
-    width: 264px;
     height: auto;
     background: #FFFFFF;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     overflow: hidden;
     padding: 1em;
-
+    transition: all .2s ease-in-out;
     &__img{
       height: 230px;
       width: 200px;
     }
-
     &__content{
       padding: 1em 0;
+    }
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.1);
     }
   }
 

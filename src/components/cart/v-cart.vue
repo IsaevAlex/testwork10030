@@ -35,10 +35,10 @@
         </div>
         <div v-if="CART.length" class="vCart__footer">
           <div class="vCart__totalSection vCart__totalSection-padding">
-            <div class="vCart__totalTitle subTitle subTitle-grey">
+            <div class="vCart__totalTitle orderText">
               <span>Итого:</span>
             </div>
-            <div class="vCart__total">
+            <div class="vCart__total orderText">
               {{ GET_CART_PRICE_SUM }} P
             </div>
           </div>

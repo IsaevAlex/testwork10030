@@ -10,9 +10,11 @@ export default new Vuex.Store({
     cart: [],
     cartOpen: false,
     toggleOrderModal: false,
+    toggleProductModal: false,
     countQuantity: 0,
     cartPriceSum: 0,
-    preloaderStatus: false
+    preloaderStatus: false,
+    productInfo: null
   },
   mutations: {
     CALL_PRELOADER(state, status){
@@ -37,6 +39,9 @@ export default new Vuex.Store({
           return amount + total.quantity;
         }, 0)
       }
+    },
+    SET_PRODUCT_INFO(state, product){
+      state.productInfo = product;
     },
     SET_PRODUCT(state, product){
       if (state.cart.length){
@@ -64,20 +69,18 @@ export default new Vuex.Store({
     },
     TOGGLE_ORDER_MODAL(state){
       state.toggleOrderModal = !state.toggleOrderModal;
+    },
+    SET_PRODUCT_MODAL(state){
+      state.toggleProductModal = !state.toggleProductModal;
     }
   },
   actions: {
     GET_PRODUCTS({commit}){
       commit('CALL_PRELOADER', true);
-      console.log(true);
-
-      axios.get('https://fakestoreapi.com/products')
+      return axios.get('https://fakestoreapi.com/products')
         .then(response => {
-          commit('CALL_PRELOADER', false);
-
           commit('SET_PRODUCTS', response.data);
-          console.log(false);
-          return response.data;
+          commit('CALL_PRELOADER', false);
         })
         .catch(e => {
           console.log(e);
@@ -88,6 +91,13 @@ export default new Vuex.Store({
       commit('DELETE_PRODUCT_FROM_CART', index);
       commit('CALCULATE_PRICE_COUNT');
       commit('COUNT_QUANTITY_FROM_CART');
+    },
+    SHOW_PRODUCT({commit}, product){
+      commit('SET_PRODUCT_INFO', product);
+      commit('SET_PRODUCT_MODAL', true);
+    },
+    CLOSE_PRODUCT({commit}){
+      commit('SET_PRODUCT_MODAL');
     },
     ADD_PRODUCT({commit}, product){
       commit('SET_PRODUCT', product);
@@ -119,6 +129,12 @@ export default new Vuex.Store({
     },
     GET_COUNT_QUANTITY(state){
       return state.countQuantity;
+    },
+    GET_PRODUCT_INFO_MODAL(state){
+      return state.productInfo;
+    },
+    GET_PRODUCT_MODAL_OPEN(state){
+      return state.toggleProductModal;
     },
     GET_CART_PRICE_SUM(state){
       return state.cartPriceSum.toFixed(2);

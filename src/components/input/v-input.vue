@@ -1,6 +1,6 @@
 <template>
-    <div class="customInput" :class="{'customInput-error': error}">
-        <input type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="customInput__input"  :value="value" @input="updateValue($event.target.value)">
+    <div class="vInput" :class="{'customInput-error': error}">
+        <input type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
     </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .customInput{
+    .vInput{
         position: relative;
         border:1px solid #F8F8F8;
         height:50px;
@@ -58,7 +58,7 @@ export default {
             background-color: #F8F8F8;
             color: #000;
             border:none;
-            font-size: 16px;
+            font-size: 18px;
             padding-top: 5px;
             display: block;
             box-sizing: border-box;

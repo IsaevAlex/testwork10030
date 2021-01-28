@@ -1,15 +1,25 @@
 <template>
   <div class="vCatalog">
-    <v-catalog-item
-      v-for="product in PRODUCTS"
-      :key="product.id"
-      :productData="product"
-      @addToCart="addToCart(product)"
-    />
+    <div class="vCatalog__preloader" v-if="GET_PRELOADER_STATUS">
+      <v-preloader/>
+    </div>
+    <template v-else>
+      <v-catalog-item
+        v-for="product in PRODUCTS"
+        :key="product.id"
+        :productData="product"
+        @addToCart="addToCart(product)"
+        @openCatalogItem="openCatalogItem(product)"
+      />
+      <v-product-modal @addToCart="addToCart"/>
+    </template>
+
   </div>
 </template>
 
 <script>
+import vProductModal from '@/components/modal/v-product-modal'
+import vPreloader from '@/components/preloader/v-preloader'
 import vCatalogItem from '@/components/catalog/v-catalog-item';
 import {mapActions,mapGetters} from 'vuex';
 export default {
@@ -20,22 +30,30 @@ export default {
     }
   },
   components:{
-    vCatalogItem
+    vCatalogItem,
+    vPreloader,
+    vProductModal
   },
-  created(){
+  mounted(){
     this.GET_PRODUCTS();
   },
   computed:{
     ...mapGetters([
-      'PRODUCTS'
+      'PRODUCTS',
+      'GET_PRELOADER_STATUS'
     ])
   },
   methods:{
     ...mapActions([
       'GET_PRODUCTS',
-      'ADD_PRODUCT'
+      'ADD_PRODUCT',
+      'SHOW_PRODUCT'
     ]),
+    openCatalogItem(product){
+      this.SHOW_PRODUCT(product);
+    },
     addToCart(product){
+      console.log(product);
       if (!product.quantity){
         this.$set(product, 'quantity', 1);
         this.$set(product, 'total', product.price);
@@ -51,6 +69,13 @@ export default {
   .vCatalog{
     display: grid;
     grid-gap: 1.75em;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+    &__preloader{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 </style>
