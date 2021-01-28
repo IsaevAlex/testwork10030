@@ -53,7 +53,6 @@ export default {
       this.SHOW_PRODUCT(product);
     },
     addToCart(product){
-      console.log(product);
       if (!product.quantity){
         this.$set(product, 'quantity', 1);
         this.$set(product, 'total', product.price);

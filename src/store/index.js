@@ -43,6 +43,15 @@ export default new Vuex.Store({
     SET_PRODUCT_INFO(state, product){
       state.productInfo = product;
     },
+    CART_UPLOAD_FROM_LOCALSTORAGE(state){
+      if (!state.cart.length){
+        if(localStorage.getItem('productsInCart') !== null){
+          let storageCart = [];
+          storageCart = JSON.parse(localStorage.getItem('productsInCart'));
+          state.cart = storageCart;
+        }
+      }
+    },
     SET_PRODUCT(state, product){
       if (state.cart.length){
         let isProductExist = false;
@@ -60,9 +69,10 @@ export default new Vuex.Store({
       else{
         state.cart.push(product);
       }
-      state.priceTotal = state.cart.reduce((amount, total) =>{
-        return amount.total + total.total
-      },0)
+      localStorage.setItem('productsInCart', JSON.stringify(state.cart));
+    },
+    LOCALStORAGE_SET_ITEM(state){
+      localStorage.setItem('productsInCart', JSON.stringify(state.cart));
     },
     TOGGLE_CART(state){
       state.cartOpen = !state.cartOpen;
@@ -75,6 +85,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    CART_UPLOAD({commit}){
+      commit('CART_UPLOAD_FROM_LOCALSTORAGE');
+      if(localStorage.getItem('productsInCart') !== null){
+        commit('CALCULATE_PRICE_COUNT');
+        commit('COUNT_QUANTITY_FROM_CART');
+      }
+    },
     GET_PRODUCTS({commit}){
       commit('CALL_PRELOADER', true);
       return axios.get('https://fakestoreapi.com/products')
@@ -87,10 +104,10 @@ export default new Vuex.Store({
           return e;
         });
     },
-    DELETE_PRODUCT_FROM_CART({commit},index){
+    DELETE_PRODUCT_FROM_CART({commit, dispatch},index){
       commit('DELETE_PRODUCT_FROM_CART', index);
-      commit('CALCULATE_PRICE_COUNT');
-      commit('COUNT_QUANTITY_FROM_CART');
+      commit('LOCALStORAGE_SET_ITEM');
+      dispatch('CART_UPLOAD');
     },
     SHOW_PRODUCT({commit}, product){
       commit('SET_PRODUCT_INFO', product);

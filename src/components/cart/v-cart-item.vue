@@ -1,5 +1,5 @@
 <template>
-  <div class="vCartItem">
+  <div class="vCartItem vCartItem-padding">
     <div class="vCartItem__header">
       <img class="vCartItem__img vCartItemImg" :src="cartData.image" alt="">
     </div>
@@ -55,10 +55,15 @@ export default {
     background: #FFFFFF;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    padding: 16px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    &-padding{
+      padding: 16px 22px;
+      @media screen and (max-width: 500px){
+        padding: 16px 0;
+      }
+    }
     &__img{
       width: 80px;
       height: 90px;

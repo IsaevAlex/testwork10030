@@ -39,33 +39,39 @@ import VButton from '@/components/button/v-button';
 import VModal from '@/components/modal/v-modal';
 import {mapGetters,mapActions} from 'vuex';
 export default {
-    name: "v-product-modal",
-    computed:{
-      ...mapGetters([
-        'GET_PRODUCT_INFO_MODAL',
-        'GET_PRODUCT_MODAL_OPEN'
-      ])
+  name: "v-product-modal",
+  computed:{
+    ...mapGetters([
+      'GET_PRODUCT_INFO_MODAL',
+      'GET_PRODUCT_MODAL_OPEN'
+    ])
+  },
+  components:{
+    VButton,
+    VModal
+  },
+  methods:{
+    ...mapActions([
+      'CLOSE_PRODUCT'
+    ]),
+    addToCart(){
+      this.$emit('addToCart', this.GET_PRODUCT_INFO_MODAL);
     },
-    components:{
-      VButton,
-      VModal
-    },
-    methods:{
-      ...mapActions([
-        'CLOSE_PRODUCT'
-      ]),
-      addToCart(){
-        this.$emit('addToCart', this.GET_PRODUCT_INFO_MODAL);
-      },
-      closeModal() {
-        this.CLOSE_PRODUCT();
-      }
+    closeModal() {
+      this.CLOSE_PRODUCT();
     }
+  }
 }
 </script>
 
 <style scoped lang="scss">
   .vProductModal{
+    &__info{
+      overflow-y: auto;
+      @media screen and (max-height: 700px){
+        max-height: 400px;
+      }
+    }
     &__header{
       display: flex;
       justify-content: space-between;

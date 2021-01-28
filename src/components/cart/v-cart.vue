@@ -61,11 +61,15 @@ export default {
     vButton,
     vCartItem
   },
+  mounted () {
+    this.CART_UPLOAD();
+  },
   methods:{
     ...mapActions([
       'DELETE_PRODUCT_FROM_CART',
       'TOGGLE_CART',
-      'TOGGLE_ORDER_MODAL'
+      'TOGGLE_ORDER_MODAL',
+      'CART_UPLOAD'
     ]),
     closeCart(){
       this.TOGGLE_CART();
@@ -91,7 +95,7 @@ export default {
     right: 0;
     z-index: 99;
     height: calc(100vh - 104px);
-    width: 460px;
+    max-width: 460px;
     top: 0;
     background-color: #fff;
     padding: 52px 48px;
@@ -99,6 +103,10 @@ export default {
     border-radius: 8px 0px 0px 8px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 500px){
+      padding: 52px 20px;
+    }
 
     &__subTitle{
       padding: 24px 0 16px 0;

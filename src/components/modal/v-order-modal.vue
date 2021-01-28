@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 import {mapActions, mapGetters} from 'vuex';
 import VInput from '@/components/input/v-input';
 import VButton from '@/components/button/v-button';
@@ -66,7 +66,8 @@ export default {
   components:{
     VModal,
     VButton,
-    VInput
+    VInput,
+    MaskedInput
   },
   data(){
     return{
