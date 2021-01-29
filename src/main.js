@@ -5,6 +5,9 @@ import store from './store'
 import axios from 'axios'
 import Vuelidate from 'vuelidate'
 import mainLayout from '@/views/layouts/mainLayout.vue'
+const VueInputMask = require('vue-inputmask').default
+
+Vue.use(VueInputMask)
 
 Vue.component('main-layout', mainLayout)
 Vue.prototype.$axios = axios

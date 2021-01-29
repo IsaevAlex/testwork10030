@@ -60,6 +60,7 @@ export default {
       border: none;
       transition: all .2s ease-in-out;
       padding: 0;
+      font-size: 2em;
       width: auto;
       &:hover{
         border: none;

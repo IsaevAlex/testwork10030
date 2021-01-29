@@ -1,6 +1,11 @@
 <template>
     <div class="vInput" :class="{'customInput-error': error}">
+        <template v-if="mask">
+          <input  v-mask="{mask: '9 (999) 999-9999', greedy: true}" type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
+        </template>
+      <template v-else>
         <input type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
+      </template>
     </div>
 </template>
 
@@ -8,6 +13,10 @@
 export default {
   name: "v-input",
   props:{
+    mask:{
+      type: Boolean,
+      default: false
+    },
     value:{
       type: String,
       default: ''

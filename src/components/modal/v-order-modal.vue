@@ -28,7 +28,7 @@
 
         </div>
         <div class="vOrderModal__input vOrderModal__input-mb">
-          <v-input :placeholder="placeholders.phone" v-model.trim="$v.phone.$model"/>
+          <v-input :mask="true" :placeholder="placeholders.phone" v-model.trim="$v.phone.$model"/>
           <div class="vOrderModal__error" v-if='!$v.phone.required'>
             *Это поле обязательно для заполнения
           </div>
@@ -66,8 +66,8 @@ export default {
   components:{
     VModal,
     VButton,
-    VInput,
-    MaskedInput
+    VInput
+
   },
   data(){
     return{
@@ -105,10 +105,28 @@ export default {
   },
   methods:{
     ...mapActions([
-      'TOGGLE_ORDER_MODAL'
+      'TOGGLE_ORDER_MODAL',
+      'SET_USER_INFO',
+      'TOGGLE_ORDER_SUCCESSFULL_MODAL'
     ]),
     orderProduct(){
-      console.log(this.$v);
+      if (this.$v.address.required &&
+          this.$v.name.required &&
+          this.$v.phone.required){
+         let userInfo = {
+           name: this.$v.name.$model,
+           phone: this.$v.phone.$model,
+           address: this.$v.address.$model
+         }
+         this.SET_USER_INFO(userInfo);
+         this.closeModal();
+         this.TOGGLE_ORDER_SUCCESSFULL_MODAL();
+         this.$v.name.$model = this.$v.address.$model= this.$v.phone.$model = '';
+      }
+      else{
+        alert(this.$v);
+      }
+
     },
     closeModal(){
       this.TOGGLE_ORDER_MODAL();

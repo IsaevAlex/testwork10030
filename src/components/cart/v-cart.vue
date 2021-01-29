@@ -30,6 +30,8 @@
             v-for="(cartItem,index) in CART"
             :key="cartItem.id"
             :cartData="cartItem"
+            @increaseCountCartItem = "increaseCountCartItem(cartItem)"
+            @decreaseCountCartItem = "decreaseCountCartItem(cartItem)"
             @deleteProductFromCart="deleteProductFromCart(index)"
           />
         </div>
@@ -69,8 +71,16 @@ export default {
       'DELETE_PRODUCT_FROM_CART',
       'TOGGLE_CART',
       'TOGGLE_ORDER_MODAL',
-      'CART_UPLOAD'
+      'CART_UPLOAD',
+      'INCREASE_QUANTITY_CART',
+      'DECREASE_QUANTITY_CART'
     ]),
+    increaseCountCartItem(cartItem){
+      this.INCREASE_QUANTITY_CART(cartItem);
+    },
+    decreaseCountCartItem(cartItem){
+      this.DECREASE_QUANTITY_CART(cartItem);
+    },
     closeCart(){
       this.TOGGLE_CART();
     },

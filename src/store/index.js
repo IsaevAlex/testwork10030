@@ -14,7 +14,9 @@ export default new Vuex.Store({
     countQuantity: 0,
     cartPriceSum: 0,
     preloaderStatus: false,
-    productInfo: null
+    productInfo: null,
+    userInfo: null,
+    toggleOrderSuccessfullModal: false
   },
   mutations: {
     CALL_PRELOADER(state, status){
@@ -40,6 +42,9 @@ export default new Vuex.Store({
         }, 0)
       }
     },
+    SET_USER_INFO(state,userInfo){
+      state.userInfo = userInfo;
+    },
     SET_PRODUCT_INFO(state, product){
       state.productInfo = product;
     },
@@ -51,6 +56,17 @@ export default new Vuex.Store({
           state.cart = storageCart;
         }
       }
+    },
+    DECREASE_QUANTITY_CART(state,cartItem){
+      state.cart.map((item) =>{
+        if (item.id === cartItem.id){
+          if (item.quantity > 1){
+            item.quantity = item.quantity - 1;
+            item.total = item.total - item.price;
+          }
+        }
+      });
+      localStorage.setItem('productsInCart', JSON.stringify(state.cart));
     },
     SET_PRODUCT(state, product){
       if (state.cart.length){
@@ -77,6 +93,9 @@ export default new Vuex.Store({
     TOGGLE_CART(state){
       state.cartOpen = !state.cartOpen;
     },
+    TOGGLE_ORDER_SUCCESSFULL_MODAL(state){
+      state.toggleOrderSuccessfullModal = !state.toggleOrderSuccessfullModal;
+    },
     TOGGLE_ORDER_MODAL(state){
       state.toggleOrderModal = !state.toggleOrderModal;
     },
@@ -85,12 +104,28 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    INCREASE_QUANTITY_CART({commit}, cartItem){
+      commit('SET_PRODUCT', cartItem);
+      commit('COUNT_QUANTITY_FROM_CART');
+      commit('CALCULATE_PRICE_COUNT');
+    },
+    DECREASE_QUANTITY_CART({commit}, cartItem){
+      commit('DECREASE_QUANTITY_CART', cartItem);
+      commit('COUNT_QUANTITY_FROM_CART');
+      commit('CALCULATE_PRICE_COUNT');
+    },
+    TOGGLE_ORDER_SUCCESSFULL_MODAL({commit}){
+      commit('TOGGLE_ORDER_SUCCESSFULL_MODAL');
+    },
     CART_UPLOAD({commit}){
       commit('CART_UPLOAD_FROM_LOCALSTORAGE');
       if(localStorage.getItem('productsInCart') !== null){
         commit('CALCULATE_PRICE_COUNT');
         commit('COUNT_QUANTITY_FROM_CART');
       }
+    },
+    SET_USER_INFO({commit}, userInfo){
+      commit('SET_USER_INFO', userInfo);
     },
     GET_PRODUCTS({commit}){
       commit('CALL_PRELOADER', true);
@@ -129,6 +164,9 @@ export default new Vuex.Store({
     }
   },
   getters:{
+    GET_USER_INFO(state){
+      return state.userInfo;
+    },
     GET_PRELOADER_STATUS(state){
       return state.preloaderStatus;
     },
@@ -143,6 +181,9 @@ export default new Vuex.Store({
     },
     GET_ORDER_MODAL_OPEN(state){
       return state.toggleOrderModal;
+    },
+    GET_ORDER_SUCCESSFULL_MODAL_OPEN(state){
+      return state.toggleOrderSuccessfullModal;
     },
     GET_COUNT_QUANTITY(state){
       return state.countQuantity;
