@@ -53,7 +53,9 @@ export default {
     ]),
     filteredProducts() {
       return this.PRODUCTS.filter(product => {
+
         return product.title.toLowerCase().includes(this.GET_SEARCH_VALUE.toLowerCase())
+
       })
     }
   },

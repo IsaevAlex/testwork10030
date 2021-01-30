@@ -56,14 +56,9 @@ export default {
   },
   watch:{
     search(val){
-      if (val){
-        this.SEARCH_PRODUCTS(val);
-        if (this.$router.currentRoute.name.name !== 'catalogPage'){
-          this.$router.push({name: 'catalogPage'});
-        }
-      }
-      else{
-        this.GET_PRODUCTS();
+      this.SEARCH_PRODUCTS(val);
+      if (this.$router.currentRoute.name.name !== 'catalogPage'){
+        this.$router.push({name: 'catalogPage'});
       }
     }
   }
