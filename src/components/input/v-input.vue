@@ -1,7 +1,7 @@
 <template>
     <div class="vInput" :class="{'customInput-error': error}">
         <template v-if="mask">
-          <input  v-mask="{mask: '9 (999) 999-9999', greedy: true}" type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
+          <input v-mask="{mask: '9 999-999-9999', greedy: true}" type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
         </template>
       <template v-else>
         <input type="text" :placeholder="placeholder" ref="input" :name="placeholder" class="vInput__input"  :value="value" @input="updateValue($event.target.value)">
@@ -74,6 +74,9 @@ export default {
             width: 100%;
             height: 50px;
             bottom:0px;
+            @media screen and (max-width: 500px){
+              font-size: 14px;
+            }
             &:focus {
                 outline: none;
             }

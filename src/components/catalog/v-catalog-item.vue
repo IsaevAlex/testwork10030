@@ -62,6 +62,9 @@ export default {
     &__content{
       padding: 1em 0;
     }
+    &__wrapper{
+      text-align: center;
+    }
     &:hover{
       cursor: pointer;
       transform: scale(1.1);

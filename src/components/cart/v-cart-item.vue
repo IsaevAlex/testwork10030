@@ -82,6 +82,7 @@ export default {
       height: 90px;
     }
     &__content{
+      text-align: center;
       padding: 0 22px;
     }
   }

@@ -11,7 +11,7 @@
     <div slot="body">
       <div class="vOrderSuccessFullModal__content">
         <div class="vOrderSuccessFullModal__successIcon">
-          <img class="vOrderSuccessFullModal__img" src="@/assets/icons/success-icon.png" alt="">
+          <img class="vOrderSuccessFullModal__img" src="@/assets/icons/success-icon.svg" alt="">
         </div>
         <div class="vOrderSuccessFullModal__text">
           <p class="orderText-min">Поздравляем Вас с успешным выполнением заказа!!!</p>
@@ -51,6 +51,9 @@ export default {
 
 <style scoped lang="scss">
   .vOrderSuccessFullModal{
+    &__successIcon{
+      text-align: center;
+    }
     &__header{
       display: flex;
       align-items: center;

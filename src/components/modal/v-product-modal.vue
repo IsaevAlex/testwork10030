@@ -11,7 +11,10 @@
       </div>
     </div>
     <div slot="body">
-      <div v-if="GET_PRODUCT_INFO_MODAL" class="vProductModal__Info">
+      <div v-if="!GET_PRODUCT_INFO_MODAL" class="vProductModal__preloader">
+        <v-preloader />
+      </div>
+      <div v-else class="vProductModal__Info">
         <div class="vProductModal__imgWrapper">
           <img class="vProductModal__img" :src="GET_PRODUCT_INFO_MODAL.image" alt="">
         </div>
@@ -27,7 +30,7 @@
       </div>
     </div>
     <div slot="footer">
-      <div class="vOrderModal__btn vOrderModal__btn-submit">
+      <div class="vOrderModal__btn vOrderModal__btn-submit" v-if="GET_PRODUCT_INFO_MODAL">
         <v-button @click="addToCart(GET_PRODUCT_INFO_MODAL)" type="info">Добавить в корзину</v-button>
       </div>
     </div>
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import vPreloader from '@/components/preloader/v-preloader'
 import VButton from '@/components/button/v-button';
 import VModal from '@/components/modal/v-modal';
 import {mapGetters,mapActions} from 'vuex';
@@ -48,7 +52,8 @@ export default {
   },
   components:{
     VButton,
-    VModal
+    VModal,
+    vPreloader
   },
   methods:{
     ...mapActions([
@@ -66,10 +71,14 @@ export default {
 
 <style scoped lang="scss">
   .vProductModal{
-    &__info{
+    &__imgWrapper{
+      margin-bottom: 1em;
+    }
+    &__Info{
+      text-align: center;
       overflow-y: auto;
       @media screen and (max-height: 700px){
-        max-height: 400px;
+        max-height: 500px;
       }
     }
     &__header{
@@ -81,7 +90,7 @@ export default {
       height: 250px;
     }
     &__description{
-      padding: 1em 0;
+      padding: 1em 0.5em 1em 0;
     }
   }
 </style>

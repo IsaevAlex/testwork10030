@@ -16,9 +16,13 @@ export default new Vuex.Store({
     preloaderStatus: false,
     productInfo: null,
     userInfo: null,
-    toggleOrderSuccessfullModal: false
+    toggleOrderSuccessfullModal: false,
+    searchValue: ''
   },
   mutations: {
+    SET_SEARCH_PRODUCTS(state, searchValue){
+      state.searchValue = searchValue;
+    },
     CALL_PRELOADER(state, status){
       state.preloaderStatus = status;
     },
@@ -104,6 +108,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    SEARCH_PRODUCTS({commit},searchValue){
+      commit('SET_SEARCH_PRODUCTS',searchValue);
+    },
     INCREASE_QUANTITY_CART({commit}, cartItem){
       commit('SET_PRODUCT', cartItem);
       commit('COUNT_QUANTITY_FROM_CART');
@@ -196,6 +203,9 @@ export default new Vuex.Store({
     },
     GET_CART_PRICE_SUM(state){
       return state.cartPriceSum.toFixed(2);
+    },
+    GET_SEARCH_VALUE(state){
+      return state.searchValue;
     }
   },
   modules: {

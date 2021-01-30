@@ -5,11 +5,13 @@ import store from './store'
 import axios from 'axios'
 import Vuelidate from 'vuelidate'
 import mainLayout from '@/views/layouts/mainLayout.vue'
+import errorLayout from '@/views/layouts/errorLayout.vue'
 const VueInputMask = require('vue-inputmask').default
 
 Vue.use(VueInputMask)
 
 Vue.component('main-layout', mainLayout)
+Vue.component('error-layout', errorLayout)
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(Vuelidate)

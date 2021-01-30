@@ -4,14 +4,22 @@
       <v-preloader/>
     </div>
     <template v-else>
-      <v-catalog-item
-        v-for="product in PRODUCTS"
-        :key="product.id"
-        :productData="product"
-        @addToCart="addToCart(product)"
-        @openCatalogItem="openCatalogItem(product)"
-      />
-      <v-product-modal @addToCart="addToCart"/>
+      <template v-if="filteredProducts.length">
+        <v-catalog-item
+          v-for="product in filteredProducts"
+          :key="product.id"
+          :productData="product"
+          @addToCart="addToCart(product)"
+          @openCatalogItem="openCatalogItem(product)"
+        />
+        <v-product-modal @addToCart="addToCart"/>
+      </template>
+      <template v-else>
+        <div class="vCatalog__noresults orderText">
+          <h2>По вашему запросу не найдено товаров </h2>
+        </div>
+      </template>
+
     </template>
 
   </div>
@@ -40,8 +48,14 @@ export default {
   computed:{
     ...mapGetters([
       'PRODUCTS',
-      'GET_PRELOADER_STATUS'
-    ])
+      'GET_PRELOADER_STATUS',
+      'GET_SEARCH_VALUE'
+    ]),
+    filteredProducts() {
+      return this.PRODUCTS.filter(product => {
+        return product.title.toLowerCase().includes(this.GET_SEARCH_VALUE.toLowerCase())
+      })
+    }
   },
   methods:{
     ...mapActions([

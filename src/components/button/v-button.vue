@@ -1,5 +1,6 @@
 <template>
   <button class="normal"
+          :type="checkButtonType"
           :class="[
                 type,
                 size
@@ -13,8 +14,13 @@
 
 <script>
 export default {
-  name: "v-button",
+  name: 'v-button',
+  buttonTypes: ['button', 'reset', 'submit'],
   props: {
+    buttonType:{
+      type: String,
+      default: 'button'
+    },
     type:{
       type: String,
       default: ''
@@ -28,6 +34,16 @@ export default {
   methods: {
     callback: function(e) {
       this.$emit('click', e);
+    }
+  },
+  computed:{
+    checkButtonType(){
+      if (this.$options.buttonTypes.includes(this.buttonType)){
+        return this.buttonType;
+      }
+      else{
+        return 'button';
+      }
     }
   }
 }

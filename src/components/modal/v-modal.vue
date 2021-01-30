@@ -68,6 +68,10 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
       transition: all .3s ease;
       font-family: 'Lato', sans-serif;
+
+      @media screen and (max-width: 700px){
+        height: 100vh;
+      }
     }
     &__body{
       margin: 20px 0;
